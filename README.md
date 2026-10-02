@@ -1,30 +1,38 @@
-# JP Play — 해외(일본 등) 앱 다운로더
+[![English](https://img.shields.io/badge/README-English-24292f?style=for-the-badge)](./README.md) [![한국어](https://img.shields.io/badge/README-%ED%95%9C%EA%B5%AD%EC%96%B4-24292f?style=for-the-badge)](./README.ko.md)
 
-한국 플레이스토어에서 안 보이는 일본 앱 등을 PC에서 받아 USB로 폰에 설치하는 도구입니다.
+# JP Play — Downloader for Region-Limited Apps
 
-## 실행
-`run.bat` 더블클릭 (또는 `python jpplay.py`). 처음 쓸 때 필요한 도구(`apkeep`, `adb`)를 `tools/`에 자동으로 받습니다.
+A PC tool for downloading Japanese and other region-limited Android apps that may not appear in the Korean Play Store, then installing them on a phone over USB.
 
-## 사용법
-1. **앱 찾기**: 앱 이름을 입력하고 국가(JP)를 고른 뒤 "웹에서 검색"을 누릅니다. 브라우저에 일본 Play 스토어가 열립니다.
-2. **다운로드**: 앱 페이지 주소(`...details?id=jp.xxx`)를 붙여넣고 "다운로드"를 누릅니다. 파일은 `downloads/`에 저장됩니다.
-   - **APKPure**: 로그인 없이 받을 수 있습니다. 일본 앱도 대부분 있습니다.
-   - **Google Play**: 공식 파일을 받습니다. Google 계정 이메일과 AAS 토큰이 필요합니다.
-3. **설치**: 폰에서 개발자 옵션 → USB 디버깅을 켜고 PC에 연결한 뒤 "연결된 기기 확인"을 누릅니다. 폰에 뜨는 허용 창을 승인하고 설치합니다. `.apk`, `.xapk`(분할 APK + OBB)를 모두 지원합니다.
+## Run
 
-### Google Play AAS 토큰 발급 (선택)
-1. PC 브라우저에서 https://accounts.google.com/EmbeddedSetup 에 로그인합니다.
-2. 개발자도구(F12) → Application → Cookies에서 `oauth_token` 값을 복사합니다.
-3. 아래 명령을 실행합니다.
-   `tools\apkeep.exe -e 이메일 --oauth-token 복사한값 -d google-play -a com.android.chrome downloads`
-4. 출력된 AAS 토큰을 프로그램에 입력합니다. 토큰은 비밀번호처럼 관리하세요.
+Double-click `run.bat` (or run `python jpplay.py`). On first use, required tools such as `apkeep` and `adb` are downloaded automatically into `tools/`.
 
-## 폰에서 바로 쓰는 방법 (가장 간편)
-PC 없이 폰 안에서 "모든 나라 플레이스토어"처럼 쓰려면 **Aurora Store**(오픈소스 Play 스토어 클라이언트)를 사용하세요.
-- 설치: https://auroraoss.com 또는 F-Droid
-- 익명(Anonymous) 로그인 → 일본 VPN을 켠 상태로 검색하면 일본 앱이 보이고 바로 설치됩니다.
+## Usage
 
-## 참고
-- 공식 Play 스토어 앱 자체는 수정할 수 없습니다. Google 서명이 되어 있고, 국가는 Google 서버가 계정 결제 국가와 IP로 판단하기 때문입니다. 그래서 이 도구나 Aurora Store 같은 우회 방식을 씁니다.
-- 일부 일본 앱(은행, PayPay, 게임 등)은 설치해도 앱 안에서 일본 IP나 일본 전화번호를 요구할 수 있습니다.
-- 앱 업데이트는 자동으로 되지 않습니다. 다시 받아서 설치하세요(Aurora Store는 업데이트를 지원합니다).
+1. **Find an app**: enter the app name, choose a country such as JP, and click "Search on Web". The Japanese Play Store opens in your browser.
+2. **Download**: paste the app-page URL (`...details?id=jp.xxx`) and click "Download". Files are saved under `downloads/`.
+   - **APKPure**: can download without signing in and carries many Japanese apps.
+   - **Google Play**: downloads the official package. A Google account email and AAS token are required.
+3. **Install**: enable Developer options → USB debugging on the phone, connect it to the PC, then click "Check Connected Device". Approve the authorization prompt on the phone and install. Both `.apk` and `.xapk` (split APK + OBB) are supported.
+
+### Getting a Google Play AAS Token (Optional)
+
+1. Sign in at https://accounts.google.com/EmbeddedSetup in a PC browser.
+2. Open Developer Tools (F12) → Application → Cookies and copy the `oauth_token` value.
+3. Run:
+   `tools\apkeep.exe -e EMAIL --oauth-token COPIED_VALUE -d google-play -a com.android.chrome downloads`
+4. Enter the resulting AAS token in the program. Treat the token like a password.
+
+## Phone-Only Option
+
+If you want an "all-country Play Store" experience directly on your phone without a PC, consider **Aurora Store**, an open-source Play Store client.
+
+- Install from https://auroraoss.com or F-Droid
+- Sign in anonymously, connect to a Japanese VPN, then search and install Japanese apps directly
+
+## Notes
+
+- The official Play Store app itself cannot simply be modified. It is Google-signed, and region availability is determined by Google servers using account/payment-country and IP signals. This tool and Aurora Store take a different client-side approach.
+- Some Japanese apps, including banking, PayPay, or games, may still require a Japanese IP address or Japanese phone number after installation.
+- Updates are not automatic. Download and install the package again when needed. Aurora Store supports update checks.
